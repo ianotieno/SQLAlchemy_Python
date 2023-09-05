@@ -50,9 +50,9 @@ session = Session()
 # session.add(person)
 # session.commit()
 
-p1 = Person(912, "oti", "smith", "m", 23)
-# p2 = Person(564, "paul", "smith", "f", 23)
-# p3 = Person(533, "meek", "juger", "m", 23)
+p1 = Person(986, "oti", "smith", "m", 23)
+p2 = Person(577, "paul", "smith", "f", 23)
+p3 = Person(523, "meek", "juger", "m", 23)
 session.add(p1)
 # session.add(p2)
 # session.add(p3)
@@ -61,8 +61,16 @@ session.commit()
 # session.add(new_person)
 # session.commit()
 
-t1=Thing(1,"car",p1.ssn)
+t1=Thing(1,"laptop",p1.ssn)
+t2=Thing(1,"phone",p2.ssn)
+t3=Thing(1,"key",p3.ssn)
+t4=Thing(1,"tv",p1.ssn)
+
+
 session.add(t1)
+session.add(t2)
+session.add(t3)
+session.add(t4)
 session.commit()
 
 results = session.query(Person).all()
@@ -71,6 +79,7 @@ print(results)
 results = session.query(Person).filter(Person.lastname == "smith")
 for r in results:
     print(r)
-esults = session.query(Person).filter(Person.firstname.like("% an %"))
+results = session.query(Thing,Person).filter(Thing.owner == Person.ssn)
 for r in results:
     print(r)
+
